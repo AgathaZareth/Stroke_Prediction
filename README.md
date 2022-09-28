@@ -42,22 +42,22 @@ Data comes from the [Stroke Prediction Dataset](https://www.kaggle.com/datasets/
 
 ## Looking at the Raw Data
 ### Data Frame Info
-<img src="images/df_overview" alt="dot_info"/>
+<img src="/images/df_overview" alt="dot_info"/>
 
 
 **NOTES:** There are 201 null values in `bmi`
 
 ### Distribution of Target Feature
-<img src="images/dist_of_target" alt="target distribution as text"/>
+<img src="/images/dist_of_target" alt="target distribution as text"/>
 
 
 **NOTES:** There is an immense class imbalance
 
 ### Distributions of Other Features
-<img src="images/dist_of_other_feats" alt="other feature distributions as texts"/>
+<img src="/images/dist_of_other_feats" alt="other feature distributions as texts"/>
 
 ### Visualizing Distributions
-<img src="images/histograms" alt="Histograms"/>
+<img src="/images/histograms" alt="Histograms"/>
 
 
 **NOTES:** There are 3 features that are not categorical and do not fit into the goal of the client: to have multiple choice questions. 
@@ -112,7 +112,7 @@ Data comes from the [Stroke Prediction Dataset](https://www.kaggle.com/datasets/
 
 # Tranforming Data After Train Test Split
 ### Pair Plot of Training Data
-<img src="images/pair_plot.png" alt="pair plot"/>
+<img src="/images/pair_plot.png" alt="pair plot"/>
 
 
 **NOTES:** `age` appears to be a significant feature. 
@@ -158,7 +158,7 @@ The pair plot is great when comparing continuous features, however, it is useles
   
 
 ### Distribution of Categorical Features from Train Data
-<img src="images/catergorical_bars.png" alt="catergorical features as bar graphs"/>
+<img src="/images/catergorical_bars.png" alt="catergorical features as bar graphs"/>
 
 **NOTES:** 
 - The added feature `age_50+` further suggests that age is the most significant feature. 
