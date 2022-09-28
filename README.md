@@ -48,7 +48,11 @@ Data comes from the [Stroke Prediction Dataset](https://www.kaggle.com/datasets/
 **NOTES:** There are 201 null values in `bmi`
 
 ### Distribution of Target Feature
-<img src="/images/dist_of_target" alt="target distribution as text"/>
+![target distribution as text](/Users/me/Development/FlatironProjects/phase_3/PHASE3_PROJECT/Stroke_Prediction/images/dist_of_target)
+![target distribution as text](/images/dist_of_target)
+
+
+<img src="/Users/me/Development/FlatironProjects/phase_3/PHASE3_PROJECT/Stroke_Prediction/images/dist_of_target" alt="target distribution as text"/>
 
 
 **NOTES:** There is an immense class imbalance
