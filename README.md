@@ -42,7 +42,7 @@ Data comes from the [Stroke Prediction Dataset](https://www.kaggle.com/datasets/
 
 ## Looking at the Raw Data
 ### Data Frame Info
-<img src="/images/df_overview" alt="dot_info"/>
+<img src="/images/df_overview" alt="dot_info" />
 
 
 **NOTES:** There are 201 null values in `bmi`
@@ -52,16 +52,16 @@ Data comes from the [Stroke Prediction Dataset](https://www.kaggle.com/datasets/
 ![target distribution as text](/images/dist_of_target)
 
 
-<img src="/Users/me/Development/FlatironProjects/phase_3/PHASE3_PROJECT/Stroke_Prediction/images/dist_of_target" alt="target distribution as text"/>
+<img src="/Users/me/Development/FlatironProjects/phase_3/PHASE3_PROJECT/Stroke_Prediction/images/dist_of_target" alt="target distribution as text" />
 
 
 **NOTES:** There is an immense class imbalance
 
 ### Distributions of Other Features
-<img src="/images/dist_of_other_feats" alt="other feature distributions as texts"/>
+<img src="/images/dist_of_other_feats" alt="other feature distributions as texts" />
 
 ### Visualizing Distributions
-<img src="/images/histograms" alt="Histograms"/>
+<img src="/images/histograms" alt="Histograms" />
 
 
 **NOTES:** There are 3 features that are not categorical and do not fit into the goal of the client: to have multiple choice questions. 
