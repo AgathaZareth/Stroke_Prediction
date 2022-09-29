@@ -194,7 +194,7 @@ Using for loop to loop through the 3 different types of data sets (original data
 ### Base Models Ranked 
 <img src="/images/example_of_results_by_base_model.png" alt="example of a ranked base model (all iterations of a base model, ranked by test recall" />
 
-### Using `results` to choose pick which models to further explore
+### Using `results` to choose which models to further explore
 From here I filtered by train and test scores that are within 13% of eachother (to avoid models that are overfit), and who's train recall score was greater than .60, ranked them by test recall score, then seperated by data used. 
 I then pulled out top two models for each data type and plotted a confusion matrix and roc curve as well as print a classification report.  
 
@@ -226,8 +226,40 @@ Below I will model both training data and test data separately.
 <img src="/images/gs_train.png" alt="train data confusion matrix and roc curve with grid search hyper parameters added" />
 
 #### Test Data
+*NOTE:* min_samples_split=2 is not included in the model details print out, this is a default parameter and default parameters are not 
+printed when fed directly into the function
 <img src="/images/gs_test_cr.png" alt="test data classification report with grid search hyper parameters added" />
 <img src="/images/gs_test.png" alt="test data confusion matrix and roc curve with grid search hyper parameters added" />
+
+Portion of THRESHOLD STATS printed with final test data model
+<img src="/images/thresh.png" alt="snippet of THRESHOLDS STATS" />
+
+
+**NOTES:** This model captures 80% of stroke patients. That means 20% of patients who did in fact have a stroke were missed. Of patients who did not have a stroke, the model captured 62%. Meaning 38% of those no stroke patients were incorrectly predicted as having a stroke. By shifting the decision threshold of the classifer this model can increase the percent of true positives (decrease percent of false negatives) to capture more stroke patients, but note, that this will result in an increase in false positives (see above THRESHOLDS STATS and red cirlce on ROC Curve). This will come down to Kasier's desire to be more or less aggressive with the predictions. I would suggest, based on the disclaimer of, "this is not an official diagnosis and is instead meant to direct people to conversations with their primary physician" that they take a more aggressive stance on predictions.
+
+## Next Steps
+At the very least, I would adjust the decision threshold of this final classifier to get true positive rate up to 84%. This 4% increase in true positives would only result in a 1% increase in false positives (see THRESHOLD: 0.50 | FPR: 39.09%, TPR:84.00%) and I feel that small, 1% increase justifies the adjustment. 
+
+I would also re tune the hyper parameters with a new gridsearch dictionary with values around the hyper parameters of this final model to see if somewhere in the gaps of orginal grid search there are better hyper perameters that will increase true positive rate and decrease the false positive rate. 
+
+Going forward, a more explicitly defined comfort range for false positives might result in a larger criteria range when selecting top performing models, which therefore may yeild higher true positives.
+
+Check with marketing team to see if modeling with more features is an option. For example, 8 features fits nicely with "80% of strokes are preventable." 
+
+Finally, remodel with age broken into more than the binary 50+ "Yes" or "No."
+
+
+## Thank You
+Let's work together, 
+
+   - Email: cassigroesbeck@emailplace.com
+
+   - GitHub: [@AgathaZareth](https://github.com/AgathaZareth)
+
+   - LinkedIn: [Cassarra Groesbeck](linkedin.com/in/cassarra-groesbeck-a64b75229)
+
+
+
 
 
 
