@@ -111,7 +111,7 @@ Data comes from the [Stroke Prediction Dataset](https://www.kaggle.com/datasets/
  
 ---
 
-# Tranforming Data After Train Test Split
+## Tranforming Data After Train Test Split
 ### Pair Plot of Training Data
 <img src="/images/pair_plot.png" alt="pair plot"/>
 
@@ -159,7 +159,7 @@ The pair plot is great when comparing continuous features, however, it is useles
   
 
 ### Distribution of Categorical Features from Train Data
-<img src="/images/catergorical_bars.png" alt="catergorical features as bar graphs"/>
+<img src="/images/catergorical_bars.png" alt="catergorical features as bar graphs" />
 
 **NOTES:** 
 - The added feature `age_50+` further suggests that age is the most significant feature. 
@@ -169,22 +169,67 @@ The pair plot is great when comparing continuous features, however, it is useles
 
 Of the added features:
 - I will keep:
- - `age_50+`
- - `bmi_range`
- - `avg_glucose_range`
+  - `age_50+`
+  - `bmi_range`
+  - `avg_glucose_range`
 
 
 - And drop: 
- - `hyper_heart`
+  - `hyper_heart`
  
 
 Of the original features: 
 - I will drop the 3 continuous features (*note: they have been replaced with the added categorical features*)
- - `age`
- - `bmi`
- - `avg_glucose_level`
+  - `age`
+  - `bmi`
+  - `avg_glucose_level`
  
 ---
+## Modeling with loops
+Using for loop to loop through the 3 different types of data sets (original data with continuous features, 10 categorical features, and 7 categorical features). For each data set, it loops through the ten base models (see 11a - 1. Base Models). For those ten base models, some form of imputation is required due to NaNs in `bmi` (or `bmi_ranges` depending on the dataset used) so the loop runs through 3 different ways of imputing data (IterativeImputer, SimpleImputer, KNNImputer). Scaling, smote, and grid search are optional so each base models loops through with and without these. As well as every relative combination of the prementioned factors (scaling not relative to all categorical data so this step is skipped when appropiate). When data is scaled StandardScaler is used. When smote is used SMOTENC or SMOTEN is used, depending on weather or not data is all categorical or not. Finally, the loop stores model details in results df. With this `results` df I was able to pull out the baseline models for each base model and see there is a large degree of over fitting. 
+
+### Example of Baselines Grouped by Each Base Model
+<img src="/images/exmple_of_baseline_by_base_model.png" alt="an example of a baseline df grouped by each base model" />
+
+### Base Models Ranked 
+<img src="/images/example_of_results_by_base_model.png" alt="example of a ranked base model (all iterations of a base model, ranked by test recall" />
+
+### Using `results` to choose pick which models to further explore
+From here I filtered by train and test scores that are within 13% of eachother (to avoid models that are overfit), and who's train recall score was greater than .60, ranked them by test recall score, then seperated by data used. 
+I then pulled out top two models for each data type and plotted a confusion matrix and roc curve as well as print a classification report.  
+
+# Final Model
+For the sake of capturing as many true strokes as possible, while maintaining a fairly decent accuracy, I used recall as my primary evaluation metric, with the f1 score as the secondary metric. 
+
+The best performing 7-feature model captures 80% of the true positive strokes, and 62% of true negatives. 
+
+Bumping up the number of features to 10 did not result in better models. One captured the same 80% of true positives but had a 1% decrease in true negatives. The other captured 84% percent of true positives but even worse true negative of 59%. 
+
+By comparison, the original data yeilded a model that captured the same 80% of true positives and 73% of true negatives. 
+
+Based on Kaiser's target of 7 questions, I have chosen my final model to use 7 features inspite of it's lower true negative rate (compared to original data model). This Final Model is: `ExtraTreesClassifier(class_weight='balanced', criterion='entropy', max_depth=6, min_samples_leaf=6, random_state=42)` using `SimpleImputer()`. 
+
+Below I will model both training data and test data separately.
+
+### Baselines 
+#### Train Data
+<img src="/images/base_train_cr.png" alt="baseline train data classification report" />
+<img src="/images/base_train.png" alt="baseline train data confusion matrix and roc curve" />
+
+#### Test Data
+<img src="/images/base_test_cr.png" alt="baseline test data classification report" />
+<img src="/images/base_test.png" alt="baseline test data confusion matrix and roc curve" />
+
+### With GridSearchCV Hyper Parameters Added
+#### Train Data
+<img src="/images/gs_train_cr.png" alt="train data classification report with grid search hyper parameters added" />
+<img src="/images/gs_train.png" alt="train data confusion matrix and roc curve with grid search hyper parameters added" />
+
+#### Test Data
+<img src="/images/gs_test_cr.png" alt="test data classification report with grid search hyper parameters added" />
+<img src="/images/gs_test.png" alt="test data confusion matrix and roc curve with grid search hyper parameters added" />
+
+
 
 
 
